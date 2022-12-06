@@ -1,0 +1,36 @@
+
+import pandas as pd
+from flask_ngrok import run_with_ngrok
+from flask import request, jsonify, Flask
+import random as rk
+from fastapi import FastAPI
+import nest_asyncio
+from pyngrok import ngrok
+import uvicorn
+
+app = Flask(__name__)
+run_with_ngrok(app)
+
+d={
+    "name": "Nikola",
+    "surname": "Tesla",
+    "idade": 60
+}
+app.route("/input")
+
+def home():
+  return "<marquee> <h3> To check in put ADD'/input' TO THE URL TO CHECK OUT PUT ADD'/output' to the URl.</h3></marquee>"
+
+def input():
+  return jsonify(d)
+
+@app.route('/output', methods=['GET','POST'])
+
+def predJson():
+  pred = r.choice(["positive","negative"])
+  nd = d
+  nd["prediction"]= pred
+  return jsonify(nd)
+app.run()
+
+
